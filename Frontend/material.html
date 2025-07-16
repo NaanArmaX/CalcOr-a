@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            padding: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #21867a;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cadastro de Material</h1>
+
+    <form id="cadastroForm" action="../Backend/insert_material.php" method="POST">
+        <div class="form-group">
+            <label for="nome">Material:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Preço:</label>
+            <input type="text" id="preco" name="preco" required oninput="mascaraPreco(this)">
+        </div>
+
+
+        <button type="submit">Adiconar Material</button>
+
+    </form>
+
+    <script>
+function mascaraPreco(input) {
+    // Remove tudo que não for número
+    let valor = input.value.replace(/\D/g, '');
+
+    // Converte para número com centavos
+    valor = (valor / 100).toFixed(2) + '';
+
+    // Troca o ponto decimal por vírgula
+    valor = valor.replace('.', ',');
+
+    // Adiciona separador de milhares
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    input.value = valor ? 'R$ ' + valor : '';
+}
+    </script>
+
+</body>
+</html>
